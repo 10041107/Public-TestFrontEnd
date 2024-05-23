@@ -1,0 +1,239 @@
+@import "./_custom_preflight.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+@layer base {
+
+  /* 가운데 정렬 */
+  :root {
+      height: 100vh;
+    }
+
+  html,
+  body {
+    @apply flex flex-col items-center justify-center min-h-screen font-sans text-gray-800 bg-gray-100 dark:text-neutral-200;
+    font-family: 'Noto Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    font-size: 18px;
+  }
+
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 100vw;
+    height: 100%;
+    overflow: hidden;
+    color: #3b3535;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    li,
+    ui,
+    a {
+      @apply font-sans;
+    }
+  
+    h1 {
+      @apply text-3xl font-bold text-neutral-700 hover:text-neutral-500;
+      /* 모바일 화면을 위한 기본 크기 */
+      @apply lg:text-4xl text-neutral-700 hover:text-neutral-500;
+      /* 큰 화면에서의 크기 조정 */
+    }
+    h2 {
+      @apply text-2xl font-semibold text-neutral-700 hover:text-neutral-500;
+      @apply lg:text-3xl text-neutral-700 hover:text-neutral-500;
+    }
+  
+    h3 {
+      @apply text-xl font-medium text-neutral-600 hover:text-neutral-400;
+      @apply lg:text-2xl text-neutral-600 hover:text-neutral-400;
+    }
+  
+    h4 {
+      @apply text-lg font-medium text-neutral-600 hover:text-neutral-400;
+      @apply lg:text-xl text-neutral-600 hover:text-neutral-400;
+    }
+
+    h5 {
+      @apply font-medium text-neutral-600 hover:text-neutral-400;
+      @apply text-neutral-600 hover:text-neutral-400;
+    }
+
+  p,
+  li {
+    @apply text-base text-neutral-400;
+  }
+
+  a {
+    @apply text-neutral-400;
+  }
+  
+
+
+@keyframes loading-pulse-animation {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.loading-text-pulse {
+  animation: loading-pulse-animation 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+}
+
+
+
+@layer components {
+  h2.title {
+    @apply my-5 text-xl;
+  }
+
+  h3.title {
+    @apply my-5 text-lg;
+  }
+
+  .enable-transition {
+    @apply transition-all duration-300;
+  }
+
+  .link-with-icon {
+    @apply inline-flex items-center gap-1;
+  }
+
+  .flex-item-list {
+    @apply flex items-center gap-2;
+  }
+
+  .btn-with-icon {
+    @apply inline-flex items-center gap-1;
+  }
+
+  .btn-with-icon svg {
+    @apply w-4 h-4;
+  }
+
+  .btn {
+    @apply border border-gray-300 rounded-lg cursor-pointer enable-transition hover:border-brand;
+  }
+
+  .cols-2 {
+    @apply grid gap-2 sm:grid-cols-1 md:grid-cols-2;
+  }
+
+  .cols-3 {
+    @apply grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .ellipsis-text {
+    @apply overflow-hidden whitespace-nowrap overflow-ellipsis;
+  }
+}
+
+
+@layer utilities {
+  .center {
+    @apply flex items-center justify-center;
+  }
+
+  .text-highlight {
+    @apply text-yellow-500;
+  }
+}
+
+
+/* Chrome, Edge, Safari */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+
+/* Chrome, Edge, Safari */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+/* Custom CSS */
+.parent:hover .hover-visible {
+  opacity: 1;
+  /* 부모 요소에 호버가 되었을 때 텍스트의 투명도를 변경 */
+}
+
+.parent:hover .bg-white {
+  background-opacity: 100%;
+  /* 부모 요소에 호버가 되었을 때 배경의 투명도를 변경 */
+}
+
+.login-page {
+  display: block;
+  height: auto;
+  overflow: auto;
+  justify-content: normal;
+  font-family: sans-serif;
+  color: black;
+}
+
+.overlay-gif {
+  position: absolute;
+  top: 500;
+  left: 500;
+  width: 100%;
+  height: 100%;
+  /* background-image: url('/free-animated-icon-books-6454149.gif'); */
+  /* GIF 이미지 URL */
+  background-color: black;
+  background-size: cover;
+  /* 또는 contain, 자세한 사이즈 조절 필요 */
+  opacity: 0.1;
+  /* 투명도 조절로 이미지 보임 정도 조정 */
+  pointer-events: none;
+  /* 마우스 이벤트 무시 */
+}
+
+@import "./_spinner.css";
+@import "./_custom_antd.css";
+@import "./_custom_quill.css";
