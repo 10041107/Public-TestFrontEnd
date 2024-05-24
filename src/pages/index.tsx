@@ -41,6 +41,8 @@ const MainPage: React.FC = () => {
 
   return (
     <div className="hide-scrollbar" style={{ height: '100vh', overflowY: 'scroll' }}>
+       <div className="container flex flex-col flex-wrap items-center justify-center w-full py-2 mx-auto px-7 sm:w-full md:w-auto md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl force-mobile-width">
+                    
       <div>
         <CldImage
           width="150"
@@ -58,7 +60,7 @@ const MainPage: React.FC = () => {
       <Button onClick={navigateToChangePassword}>Change Password</Button>
       <Button onClick={navigateToUpdateProfile}>Update Profile</Button>
     </div>
- 
+    </div>
       <AnimatePresence>
         {isOpen && (
           <>
