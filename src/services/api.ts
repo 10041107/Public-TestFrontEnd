@@ -113,3 +113,17 @@ export const getPoliticianDetails = async (code: string) => {
     throw error;
   }
 };
+
+export const submitQuizAnswers = async (data: { sex: string; age: number; choiceAnswers: number[]; shortAnswers: string[] }) => {
+  try {
+    const response = await axiosInstance.post('/PoliticsQuiz/submit', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error submitting quiz answers:', error);
+    throw error;
+  }
+};

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { loginUser } from '../lib/api';
+import { loginUser } from '../services/api';
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });

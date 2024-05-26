@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { changePassword, fetchUserProfile } from '../lib/api';
+import { changePassword, fetchUserProfile } from '../services/api';
 
 export default function ChangePassword() {
   const [currentPassword, setCurrentPassword] = useState('');

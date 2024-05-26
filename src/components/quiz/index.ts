@@ -1,16 +1,6 @@
 
-import { QuestionType } from "../../types/index"; // 'types'에서 QuestionType을 가져옴
-// import api from "/libs/axios"; // '/libs/axios'에서 api를 가져옴
+import { QuestionType } from "../../types/index";
 
-// // 비동기적으로 질문과 답변 리스트를 가져오는 함수
-// const getQnAList = async (): Promise<QuestionType[]> => {
-//   const res = await api.get(`/question-list`); // API를 통해 `/question-list` 경로의 데이터를 가져옴
-//   return res.data; // 가져온 데이터를 반환
-// };
-
-
-// ======================
-// 이 함수는 백엔드 API가 준비될 때까지 모의 데이터를 반환합니다.
 const getQnAList = async (): Promise<QuestionType[]> => {
     return Promise.resolve([
       {

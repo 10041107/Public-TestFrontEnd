@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { fetchUserProfile } from '../lib/api';
+import { fetchUserProfile } from '../services/api';
 
 interface User {
   id: number;

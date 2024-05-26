@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { getPoliticianDetails } from '@/lib/api';
+import { getPoliticianDetails } from '../../services/api';
 import { Button, Card, Skeleton } from 'antd';
 import { ParsedUrlQuery } from 'querystring';
 

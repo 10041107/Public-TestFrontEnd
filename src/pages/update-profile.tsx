@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { updateUserProfile } from '../lib/api';
+import { updateUserProfile } from '../services/api';
 import { CldUploadWidget, CldImage } from 'next-cloudinary';
 
 // 인터페이스 정의

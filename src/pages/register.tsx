@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { CldUploadWidget, CldImage } from 'next-cloudinary';
-import { registerUser } from '../lib/api';
+import { registerUser } from '../services/api';
 
 // 인터페이스 정의
 interface CldUploadResult {
