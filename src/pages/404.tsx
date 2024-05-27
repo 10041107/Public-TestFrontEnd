@@ -1,12 +1,53 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import AnimatedContainer from '../components/motiondiv/AnimatedContainer';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { DrawerNavigation } from "../components/navigation";
+import NavigationToggleButton from '@/components/NavigationToggleButton';
 
 
 const Custom404: React.FC = (): JSX.Element => {
+
+    const [isOpen, setIsOpen] =  useState(false);
+
+    const toggleOpen = () => setIsOpen(!isOpen);
+    
   const router = useRouter();
   return (
     <div className="h-screen overflow-y-scroll lg:overflow-y-hidden lg:hide-scrollbar">
+        <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50, transition: { duration: 0.3 } }}
+              style={{ position: 'fixed', top: 0, left: 0, height: '100vh', zIndex: 120 }}
+            >
+              <DrawerNavigation />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.3 } }}
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                zIndex: 110,
+                pointerEvents: 'auto', // 클릭 이벤트를 허용하도록 설정
+              }}
+              onClick={toggleOpen} // 클릭 시 사이드바를 닫도록 설정
+            />
+          </>
+        )}
+      </AnimatePresence>
+      <NavigationToggleButton isOpen={isOpen} toggle={toggleOpen} />
+        
     <section>
         <div className="container flex items-center min-h-screen py-12 mx-auto px-30">
                 <AnimatedContainer type="fadeIn">
