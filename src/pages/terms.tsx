@@ -226,43 +226,50 @@ const Terms: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
-  return (
-    <div className="hide-scrollbar" style={{ height: '100vh', overflowY: 'scroll' }}>
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50, transition: { duration: 0.3 } }}
-              style={{ position: 'fixed', top: 0, left: 0, height: '100vh', zIndex: 120 }}
-            >
-              <DrawerNavigation />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, transition: { duration: 0.3 } }}
-              style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: 'rgba(255, 255, 255, 0.7)',
-                zIndex: 110,
-                pointerEvents: 'none',
-              }}
-            />
-          </>
-        )}
-      </AnimatePresence>
-      <NavigationToggleButton isOpen={isOpen} toggle={toggleOpen} />
-      {/* 사이드바 종료 */}
 
-      <div className="flex flex-col items-center justify-center w-screen h-screen bg-center bg-no-repeat bg-summonersRift">
+  const navigateToTerms = () => {
+    router.push('/register');
+  };
+
+  return (
+    <div className="hide-scrollbar" style={{ height: '100vh', overflowY: 'scroll' }}>      <AnimatePresence>
+    {isOpen && (
+      <>
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -50, transition: { duration: 0.3 } }}
+          style={{ position: 'fixed', top: 0, left: 0, height: '100vh', zIndex: 120 }}
+        >
+          <DrawerNavigation />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, transition: { duration: 0.3 } }}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            zIndex: 110,
+            pointerEvents: 'auto', // 클릭 이벤트를 허용하도록 설정
+          }}
+          onClick={toggleOpen} // 클릭 시 사이드바를 닫도록 설정
+        />
+      </>
+    )}
+  </AnimatePresence>
+  <NavigationToggleButton isOpen={isOpen} toggle={toggleOpen} />
+  {/* 사이드바 종료 */}
+
+  <div className="flex flex-col items-center justify-center w-screen h-screen py-6 bg-center bg-no-repeat bg-summonersRift sm:py-8 lg:py-12">
+      <div className="text-center">
         <h5 className="mb-2 text-neutral-500">가입을 환영합니다!</h5>
-        <h1 className="text-3xl font-bold mb-9 text-neutral-500">이용약관</h1>
+        <h1 className="text-4xl font-bold mb-9">이용약관</h1>
+      </div>
         <div className="flex flex-col items-center w-full gap-4 max-w-7xl xl:max-w-2xl lg:max-w-lg md:max-w-md sm:max-w-md ">
           <div className="flex flex-col h-64 p-4 border">
             <h2 className="mt-1 mb-3 text-xl font-bold">회원가입 약관</h2>
@@ -274,9 +281,9 @@ const Terms: React.FC = () => {
           </div>
         </div>
         <div className="mt-4">
-          <Button type="primary" onClick={navigateToRegister}>
+          <button className="block px-8 py-3 text-sm font-semibold text-center text-white transition duration-100 rounded-lg outline-none bg-neutral-500 ring-neutral-300 hover:bg-neutral-400 focus-visible:ring active:bg-neutral-600 md:text-base" onClick={navigateToTerms}>
             동의합니다
-          </Button>
+          </button>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ interface NavigationToggleButtonProps {
 
 const NavigationToggleButton: React.FC<NavigationToggleButtonProps> = ({ isOpen, toggle }) => {
   // 버튼 색상 상태를 관리하기 위한 useState 훅 사용
-  const [buttonColor, setButtonColor] = useState('grey');
+  const [buttonColor, setButtonColor] = useState('black');
 // 버튼 아이콘의 색상을 나타냅니다.
 
 const buttonStyle: React.CSSProperties = {
@@ -23,7 +23,7 @@ const buttonStyle: React.CSSProperties = {
   // 버튼 클릭 시 이벤트 핸들러
   const handleClick = () => {
     toggle();  // 기존 토글 기능 수행
-    setButtonColor(buttonColor === 'grey' ? 'black' : 'grey'); 
+    setButtonColor(buttonColor === 'black' ? 'black' : 'black'); 
   };
 
   return (    

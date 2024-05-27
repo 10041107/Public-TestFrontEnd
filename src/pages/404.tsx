@@ -16,7 +16,7 @@ const Custom404: React.FC = (): JSX.Element => {
   const router = useRouter();
   return (
     <div className="h-screen overflow-y-scroll lg:overflow-y-hidden lg:hide-scrollbar">
-        <AnimatePresence>
+      <AnimatePresence>
         {isOpen && (
           <>
             <motion.div
@@ -47,6 +47,7 @@ const Custom404: React.FC = (): JSX.Element => {
         )}
       </AnimatePresence>
       <NavigationToggleButton isOpen={isOpen} toggle={toggleOpen} />
+      {/* 사이드바 종료 */}
         
     <section>
         <div className="container flex items-center min-h-screen py-12 mx-auto px-30">

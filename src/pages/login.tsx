@@ -6,13 +6,16 @@ import { DrawerNavigation } from "../components/navigation";
 import NavigationToggleButton from '@/components/NavigationToggleButton';
 import { useState } from 'react';
 
+
 const LoginPage = () => {
   const [isOpen, setIsOpen] =  useState(false);
 
+
   const toggleOpen = () => setIsOpen(!isOpen);
   
+
   return (
-    <div className="flex w-screen h-screen min-h-screen bg-white">
+    <div className="flex w-screen h-screen min-h-screen">
       <AnimatePresence>
         {isOpen && (
           <>
@@ -64,15 +67,14 @@ const LoginPage = () => {
         </div>
 
         <div className="flex items-center justify-center w-full h-full lg:w-1/2">
-          <div className="w-full max-w-md px-5 pb-10 text-gray-800">
+          <div className="w-full max-w-md px-5 pb-10 text-neutral-800">
             <div className="flex flex-col items-center justify-center px-2 mt-8 sm:mt-0">
-              <h2 className="mt-2 text-5xl font-bold leading-tight text-gray-700">LOGIN</h2>
-              <div className="mt-1 text-gray-400">안전한 정치 정보 플랫폼</div>
-              <div className="text-gray-600">위기의 대한민국</div>
+              <h2 className="mt-2 text-5xl font-bold leading-tight text-neutral-700">LOGIN</h2>
+              <div className="mt-1 text-neutral-400">안전한 정치 정보 플랫폼</div>
+              <div className="text-neutral-600">위기의 대한민국</div>
             </div>
-            <div className="w-full px-2 mt-12 sm:px-6">
               <LoginForm />
-            </div>
+
           </div>
         </div>
       </div>

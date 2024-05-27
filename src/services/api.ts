@@ -83,16 +83,6 @@ export const fetchUserProfile = async () => {
   return response.data;
 };
 
-export const updateUserProfile = async (profileData: any) => {
-  const token = localStorage.getItem('token');
-  const response = await axiosInstance.post('/user/updateProfile', profileData, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data;
-};
 
 export const getPoliticianList = async () => {
   try {
@@ -127,3 +117,16 @@ export const submitQuizAnswers = async (data: { sex: string; age: number; choice
     throw error;
   }
 };
+
+export const updateUserProfile = async (profileData: any) => {
+  const token = localStorage.getItem('token');
+  const response = await axiosInstance.post('/user/updateProfile', profileData, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+
