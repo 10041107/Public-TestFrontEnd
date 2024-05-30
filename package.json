@@ -31,6 +31,8 @@
     "classnames": "^2.3.2",
     "dayjs": "^1.11.9",
     "framer-motion": "^10.15.0",
+    "js-confetti": "^0.12.0",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "ky": "^0.33.3",
     "ky-universal": "^0.12.0",
@@ -49,6 +51,7 @@
     "react-query": "^3.39.3",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.23.0",
+    "recoil": "^0.7.7",
     "rollbar": "^2.26.4",
     "style-loader": "^3.3.1",
     "swr": "^2.2.0",
@@ -56,6 +59,7 @@
     "util": "^0.12.5"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3",
     "@types/jsonwebtoken": "^9",
     "@types/node": "18.11.18",
     "@types/numeral": "^2.0.2",

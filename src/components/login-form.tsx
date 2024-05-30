@@ -8,6 +8,10 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const navigateToTerms = () => {
+    router.push('/terms');
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -18,7 +22,7 @@ export default function Login() {
     setError('');
 
     try {
-      const response = await loginUser(formData.email, formData.password);
+      const response = await loginUser({ email: formData.email, password: formData.password });
       localStorage.setItem('token', response.accessToken); // 액세스 토큰 저장
       router.push('/');
     } catch (error: any) {
@@ -60,6 +64,11 @@ export default function Login() {
             </div>
             <button type="submit" className="block px-8 py-3 text-sm font-semibold text-center text-white transition duration-100 rounded-lg outline-none bg-neutral-700 ring-neutral-300 hover:bg-neutral-600 focus-visible:ring active:bg-neutral-600 md:text-base">
               로그인
+            </button>
+            <button type="button" className="block px-8 py-3 text-sm font-semibold text-center text-white transition duration-100 rounded-lg outline-none bg-neutral-700 ring-neutral-300 hover:bg-neutral-600 focus-visible:ring active:bg-neutral-600 md:text-base"
+              onClick={navigateToTerms}
+            >
+              회원가입
             </button>
           </div>
         </form>

@@ -46,7 +46,6 @@ const UpdateProfile = () => {
       });
       const uploaded = await res.json();
       if (uploaded.secure_url) {
-        setImage(uploaded.secure_url);
         setFormData((prevData) => ({ ...prevData, profileImageUrl: uploaded.secure_url }));
         setImageError('');
       } else {

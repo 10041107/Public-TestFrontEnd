@@ -47,7 +47,7 @@ export default function ChangePassword() {
 
     try {
       setLoading(true);
-      const response = await changePassword(currentPassword, newPassword);
+      const response = await changePassword({ currentPassword, newPassword });
       if (response.status === 200) {
         alert('비밀번호가 변경되었습니다. 다시 로그인해주세요.');
         // 로그아웃 처리

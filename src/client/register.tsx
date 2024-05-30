@@ -12,6 +12,7 @@ import React from 'react';
 interface CloudinaryResult {
   public_id: string;
 }
+
 export default function Register() {
   const [publicId, setPublicId] = useState("");
   const [formData, setFormData] = useState({
@@ -34,12 +35,10 @@ export default function Register() {
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,18 +48,11 @@ export default function Register() {
       return;
     }
 
-    const form = new FormData();
-    Object.keys(formData).forEach((key) => {
-      if (formData[key as keyof typeof formData] !== null) {
-        form.append(key, formData[key as keyof typeof formData] as string | Blob);
-      }
-    });
-
     setLoading(true);
     setError('');
 
     try {
-      const response = await registerUser(form);
+      const response = await registerUser(formData);
       if (response.status === 201) {
         router.push('/login');
       } else {
@@ -75,39 +67,38 @@ export default function Register() {
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen py-6 bg-center bg-no-repeat bg-summonersRift sm:py-8 lg:py-12">
-      
-<AnimatePresence>
- {isOpen && (
-   <>
-     <motion.div
-       initial={{ opacity: 0, x: -50 }}
-       animate={{ opacity: 1, x: 0 }}
-       exit={{ opacity: 0, x: -50, transition: { duration: 0.3 } }}
-       style={{ position: 'fixed', top: 0, left: 0, height: '100vh', zIndex: 120 }}
-     >
-       <DrawerNavigation />
-     </motion.div>
-     <motion.div
-       initial={{ opacity: 0 }}
-       animate={{ opacity: 1 }}
-       exit={{ opacity: 0, transition: { duration: 0.3 } }}
-       style={{
-         position: 'fixed',
-         top: 0,
-         left: 0,
-         right: 0,
-         bottom: 0,
-         backgroundColor: 'rgba(255, 255, 255, 0.7)',
-         zIndex: 110,
-         pointerEvents: 'auto', // 클릭 이벤트를 허용하도록 설정
-       }}
-       onClick={toggleOpen} // 클릭 시 사이드바를 닫도록 설정
-     />
-   </>
- )}
-</AnimatePresence>
-<NavigationToggleButton isOpen={isOpen} toggle={toggleOpen} />
-{/* 사이드바 종료 */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50, transition: { duration: 0.3 } }}
+              style={{ position: 'fixed', top: 0, left: 0, height: '100vh', zIndex: 120 }}
+            >
+              <DrawerNavigation />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.3 } }}
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                zIndex: 110,
+                pointerEvents: 'auto', // 클릭 이벤트를 허용하도록 설정
+              }}
+              onClick={toggleOpen} // 클릭 시 사이드바를 닫도록 설정
+            />
+          </>
+        )}
+      </AnimatePresence>
+      <NavigationToggleButton isOpen={isOpen} toggle={toggleOpen} />
+      {/* 사이드바 종료 */}
 
       <div className="text-center">
         <h5 className="mb-2 text-neutral-500">가입을 환영합니다!</h5>
@@ -137,7 +128,6 @@ export default function Register() {
             <input id="nickname" name="nickname" type="text" value={formData.nickname} onChange={handleChange} required className="w-full px-3 py-2 text-gray-800 transition duration-100 border rounded outline-none bg-gray-50 ring-indigo-300 focus:ring" />
           </div>
           <div className="sm:col-span-2">
-
             <label htmlFor="profileImage" className="inline-block mb-2 text-sm text-gray-800 sm:text-base text-neutral-700">프로필 이미지</label>
             {publicId && (
               <CldImage
@@ -152,6 +142,8 @@ export default function Register() {
                 if (result.event !== "success") return;
                 const info = result.info as CloudinaryResult;
                 setPublicId(info.public_id);
+                setFormData((prevData) => ({ ...prevData, profileImageUrl: info.public_id }));
+                setImageError('');
               }}
             >
               {({ open }) => (

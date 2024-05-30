@@ -11,6 +11,7 @@ import twitterStyles from '../styles/Twitter.module.css';
 import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Rollbar from 'rollbar';
+import { RecoilRoot } from 'recoil';
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
@@ -54,14 +55,14 @@ export default function App({ Component, pageProps, router }: AppProps) {
   const isTwitterPage = router.pathname === '/twitter';
 
   return (
-    <>
+    <RecoilRoot>
       <SeoHead />
-      <Head>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-      </Head>
+        <Head>
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+          <link rel="manifest" href="/site.webmanifest" />
+        </Head>
       <ConfigProvider
         theme={{
           token: {
@@ -84,6 +85,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
           </QueryClientProvider>
         </SWRConfig>
       </ConfigProvider>
-    </>
+    </RecoilRoot>
   );
 }

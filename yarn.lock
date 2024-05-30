@@ -1516,6 +1516,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/js-cookie@npm:^3":
+  version: 3.0.6
+  resolution: "@types/js-cookie@npm:3.0.6"
+  checksum: 10c0/173afaf5ea9d86c22395b9d2a00b6adb0006dcfef165d6dcb0395cdc32f5a5dcf9c3c60f97194119963a15849b8f85121e1ae730b03e40bc0c29b84396ba22f9
+  languageName: node
+  linkType: hard
+
 "@types/json5@npm:^0.0.29":
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
@@ -4071,6 +4078,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hamt_plus@npm:1.0.2":
+  version: 1.0.2
+  resolution: "hamt_plus@npm:1.0.2"
+  checksum: 10c0/c5aa5cc08228e8cc2a90150fef680bd5b09f16a327bdab799daeb80fd3c987663308b14e2c6718abdf75afce21d29607e35f2705eb336a14aa935c0ca5949ce7
+  languageName: node
+  linkType: hard
+
 "has-bigints@npm:^1.0.1, has-bigints@npm:^1.0.2":
   version: 1.0.2
   resolution: "has-bigints@npm:1.0.2"
@@ -4645,6 +4659,20 @@ __metadata:
   version: 4.15.5
   resolution: "jose@npm:4.15.5"
   checksum: 10c0/9f208492f55ae9c547fd407c36f67ec3385051b5ca390e24f5449740f17359640b3f96fabfd38bc132cc4292b964c31b921bf356253373b1bd3eb6df799b7433
+  languageName: node
+  linkType: hard
+
+"js-confetti@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "js-confetti@npm:0.12.0"
+  checksum: 10c0/2193967fae725e12e2d132b53d075c0ba4a100cedba6b039ba70c9776e0ea7743cd8e7167931c0f3960df104e1a21e9b3a9d7ffc32127437d089c82e8ddd627f
+  languageName: node
+  linkType: hard
+
+"js-cookie@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "js-cookie@npm:3.0.5"
+  checksum: 10c0/04a0e560407b4489daac3a63e231d35f4e86f78bff9d792011391b49c59f721b513411cd75714c418049c8dc9750b20fcddad1ca5a2ca616c3aca4874cce5b3a
   languageName: node
   linkType: hard
 
@@ -6141,6 +6169,7 @@ __metadata:
     "@remixicon/react": "npm:^4.2.0"
     "@tanstack/react-query": "npm:^5.35.1"
     "@tanstack/react-query-devtools": "npm:^5.35.1"
+    "@types/js-cookie": "npm:^3"
     "@types/jsonwebtoken": "npm:^9"
     "@types/node": "npm:18.11.18"
     "@types/numeral": "npm:^2.0.2"
@@ -6158,6 +6187,8 @@ __metadata:
     eslint-config-next: "npm:13.4.12"
     eslint-config-prettier: "npm:^8.9.0"
     framer-motion: "npm:^10.15.0"
+    js-confetti: "npm:^0.12.0"
+    js-cookie: "npm:^3.0.5"
     jsonwebtoken: "npm:^9.0.2"
     ky: "npm:^0.33.3"
     ky-universal: "npm:^0.12.0"
@@ -6179,6 +6210,7 @@ __metadata:
     react-query: "npm:^3.39.3"
     react-quill: "npm:^2.0.0"
     react-router-dom: "npm:^6.23.0"
+    recoil: "npm:^0.7.7"
     rollbar: "npm:^2.26.4"
     style-loader: "npm:^3.3.1"
     swr: "npm:^2.2.0"
@@ -7017,6 +7049,22 @@ __metadata:
   dependencies:
     picomatch: "npm:^2.2.1"
   checksum: 10c0/6fa848cf63d1b82ab4e985f4cf72bd55b7dcfd8e0a376905804e48c3634b7e749170940ba77b32804d5fe93b3cc521aa95a8d7e7d725f830da6d93f3669ce66b
+  languageName: node
+  linkType: hard
+
+"recoil@npm:^0.7.7":
+  version: 0.7.7
+  resolution: "recoil@npm:0.7.7"
+  dependencies:
+    hamt_plus: "npm:1.0.2"
+  peerDependencies:
+    react: ">=16.13.1"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 10c0/630a73b0bdfb1b453c68eca9b3fa0771d489006fbd856a7700174d775978ba3faa10d251ac2af7c07142014dcba07c2b103f448ecc19b6124d3228ec810f5c28
   languageName: node
   linkType: hard
 

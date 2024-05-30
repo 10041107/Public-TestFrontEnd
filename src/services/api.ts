@@ -1,10 +1,9 @@
 import axios from 'axios';
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080/';
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
-  withCredentials: true, // 쿠키를 포함하여 전송하도록 설정
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -27,7 +26,7 @@ axiosInstance.interceptors.response.use(
         const response = await axiosInstance.post('/refreshToken');
         const { accessToken } = response.data;
 
-        localStorage.setItem('token', accessToken); // 새로운 액세스 토큰 저장
+        localStorage.setItem('token', accessToken); 
         axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
         originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
         return axiosInstance(originalRequest);
@@ -43,7 +42,31 @@ axiosInstance.interceptors.response.use(
 
 export default axiosInstance;
 
-export const registerUser = async (data) => {
+interface RegisterData {
+  email: string;
+  password: string;
+  userName: string;
+}
+
+interface LoginData {
+  email: string;
+  password: string;
+}
+
+interface ChangePasswordData {
+  currentPassword: string;
+  newPassword: string;
+}
+
+interface SubmitQuizData {
+  uid: string;
+  sex: string;
+  age: number;
+  choiceAnswers: number[];
+  shortAnswers: string[];
+}
+
+export const registerUser = async (data: RegisterData) => {
   try {
     const response = await axiosInstance.post('/user/register', data, {
       headers: {
@@ -57,8 +80,8 @@ export const registerUser = async (data) => {
   }
 };
 
-export const loginUser = async (email, password) => {
-  const response = await axiosInstance.post('/user/login', { email, password }, {
+export const loginUser = async (data: LoginData) => {
+  const response = await axiosInstance.post('/user/login', data, {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -66,21 +89,21 @@ export const loginUser = async (email, password) => {
   return response.data;
 };
 
-export const changePassword = async (currentPassword, newPassword) => {
+export const changePassword = async (data: ChangePasswordData) => {
   const token = localStorage.getItem('token');
-  return axiosInstance.post('/user/change-password', { currentPassword, newPassword }, {
+  const response = await axiosInstance.post('/user/change-password', data, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     },
   });
+  return response;
 };
 
 export const fetchUserProfile = async () => {
   const response = await axiosInstance.get('/user/me');
   return response.data;
 };
-
 
 export const getPoliticianList = async () => {
   try {
@@ -92,7 +115,7 @@ export const getPoliticianList = async () => {
   }
 };
 
-export const getPoliticianDetails = async (code) => {
+export const getPoliticianDetails = async (code: string) => {
   try {
     const response = await axiosInstance.get(`/politician/${code}`);
     return response.data;
@@ -102,7 +125,15 @@ export const getPoliticianDetails = async (code) => {
   }
 };
 
-export const updateUserProfile = async (data) => {
+interface UpdateProfileData {
+  userName: string;
+  nickname: string;
+  ageGroup: string;
+  region: string;
+  profileImageUrl: string;
+}
+
+export const updateUserProfile = async (data: UpdateProfileData) => {
   try {
     const response = await axiosInstance.post('/user/updateProfile', data, {
       headers: {
@@ -118,4 +149,18 @@ export const updateUserProfile = async (data) => {
 
 export const logoutUser = async () => {
   return axiosInstance.post('/user/logout');
+};
+
+export const submitQuizAnswers = async (data: SubmitQuizData) => {
+  try {
+    const response = await axiosInstance.post('/PoliticsQuiz/submit', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error submitting quiz answers:', error);
+    throw error;
+  }
 };

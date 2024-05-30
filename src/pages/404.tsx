@@ -39,9 +39,9 @@ const Custom404: React.FC = (): JSX.Element => {
                 bottom: 0,
                 backgroundColor: 'rgba(255, 255, 255, 0.7)',
                 zIndex: 110,
-                pointerEvents: 'auto', // 클릭 이벤트를 허용하도록 설정
+                pointerEvents: 'auto', 
               }}
-              onClick={toggleOpen} // 클릭 시 사이드바를 닫도록 설정
+              onClick={toggleOpen} 
             />
           </>
         )}

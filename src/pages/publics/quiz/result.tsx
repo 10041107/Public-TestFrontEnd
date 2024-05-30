@@ -5,7 +5,37 @@ import { Fragment, useEffect, useState } from "react";
 import NavigationToggleButton from '@/components/NavigationToggleButton';
 import { AnimatePresence, motion } from 'framer-motion';
 import { DrawerNavigation } from "../../../components/navigation";
-import { submitQuizAnswers } from "../../../services/api";
+import { useRecoilValue } from 'recoil';
+import { quizResultState } from '../../../state/atoms';
+import JSConfetti from 'js-confetti';
+
+export interface QuizResult {
+  totalScore: number;
+  legalScore: number;
+  economyScore: number;
+  societyScore: number;
+  securityScore: number;
+  similarPolitics: SimilarPolitician[];
+  analysisResults: {
+    interest: number;
+    engagement: number;
+    consistency: number;
+    neutrality: number;
+  };
+}
+
+interface SimilarPolitician {
+  name: string;
+  img: string;
+  url: string;
+  scores: {
+    totalScore: number;
+    legalScore: number;
+    economyScore: number;
+    societyScore: number;
+    securityScore: number;
+  };
+}
 
 const resultImages: { [key: string]: string } = {
   left: '/result-images/left.png',
@@ -16,36 +46,52 @@ const resultImages: { [key: string]: string } = {
 
 const ResultPage = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleOpen = () => setIsOpen(!isOpen); 
+  const toggleOpen = () => setIsOpen(!isOpen);
 
   const router = useRouter();
+  const resultData = useRecoilValue(quizResultState);
   const [resultImage, setResultImage] = useState('');
-  const [resultData, setResultData] = useState<any>(null);
 
   useEffect(() => {
-    if (router.isReady) {
-      console.log('Result category from router:', router.query);
-      fetchResultData(router.query);
-    }
-  }, [router.isReady, router.query]);
-
-  const fetchResultData = async (query: any) => {
-    try {
-      const data = await submitQuizAnswers(query);
-      setResultData(data);
-
-      const score = data.totalScore;
+    if (resultData) {
+      const score = resultData.totalScore;
       let category;
       if (score <= 30) category = 'left';
       else if (score <= 50) category = 'centerLeft';
       else if (score <= 69) category = 'centerRight';
-      else category = 'right';
-
+      else category = 'right'; 
+  
       setResultImage(resultImages[category]);
-    } catch (error) {
-      console.error('Error fetching result data:', error);
+  
+      const jsConfetti = new JSConfetti();
+      let confettiColors;
+      switch (category) {
+        case 'left':
+          confettiColors = ["#1e90ff", "#4169e1", "#e0ffff"];
+          break; 
+        case 'centerLeft':
+          confettiColors = ["#87cefa", "#b0e0e6", "#ffffff"];
+          break; 
+        case 'centerRight': 
+          confettiColors = ["#e9967a", "#ffc0cb", "#ffffff"];
+          break;
+        case 'right':
+          confettiColors = ["#ff0000", "#f08080", "#e9967a"];
+          break;
+        default:
+          confettiColors = ["#f0fff0", "#d3d3d3", "#dcdcdc"];   
+      }
+      jsConfetti.addConfetti({
+        confettiColors,
+        confettiRadius: 5,
+        confettiNumber: 500,
+      });
+    } else {
+      // 데이터가 없으면 퀴즈 페이지로 리디렉션
+      router.push('/quiz');
     }
-  };
+  }, [router, resultData]);
+  
 
   const getMessage = (result: 'left' | 'centerLeft' | 'centerRight' | 'right'): string => {
     switch (result) {
@@ -157,6 +203,15 @@ const ResultPage = () => {
                 </div>
               )}
               
+              {resultData && resultData.analysisResults && (
+                <div className="mt-4 text-xl text-slate-600">
+                  <h2>관심도: {resultData.analysisResults.interest.toFixed(2)}%</h2>
+                  <h2>참여도: {resultData.analysisResults.engagement.toFixed(2)}</h2>
+                  <h2>일관성: {resultData.analysisResults.consistency.toFixed(2)}%</h2>
+                  <h2>중립성: {resultData.analysisResults.neutrality.toFixed(2)}%</h2>
+                </div>
+              )}
+              
               <motion.div
                 initial={{ opacity: 0, y: -60 }}
                 animate={{ opacity: 1, y: 0, transition: { duration: 1 } }}
@@ -172,19 +227,19 @@ const ResultPage = () => {
                   
                   {/* 현재 페이지의 URL을 복사하여 공유하는 버튼 */}
                   <button onClick={() => handleCopyClipboard(window.location.href)} className="p-1 m-1 text-white bg-gray-700 rounded">
-                                      <RiDownload2Line className="w-4 text-white lg:w-5" />
+                    <RiDownload2Line className="w-4 text-white lg:w-5" />
                     공유하기
                   </button>
                   
                   {/* 홈으로 돌아가는 버튼 */}
                   <button onClick={() => router.push('/')} className="p-1 m-1 text-white bg-gray-600 rounded">
-                                      <RiDownload2Line className="w-4 text-white lg:w-5" />
+                    <RiDownload2Line className="w-4 text-white lg:w-5" />
                     홈으로 돌아가기
                   </button>
                   
                   {/* 결과 이미지를 다운로드하는 버튼 */}
                   <button onClick={handleDownloadImage} className="p-1 m-1 text-white bg-gray-800 rounded">
-                                      <RiDownload2Line className="w-4 text-white lg:w-5" />
+                    <RiDownload2Line className="w-4 text-white lg:w-5" />
                     이미지 저장하기
                   </button>
                 </div>
@@ -198,3 +253,4 @@ const ResultPage = () => {
 };
 
 export default ResultPage;
+
